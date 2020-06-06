@@ -1298,13 +1298,12 @@ namespace startbit {
         }
         return status;
     }
-
+    
     /**
-     * Get the Infrared Receiver IR command 
-     */
-    //% weight=90 blockId=startbit_initIR  block="startbit_initIR|port %port"
-    //% subcategory=Sensor
-    export function startbit_initIR(port: startbit_infraredReceiverPort) {
+     * Infrared Receiver initialization
+    */
+    //% weight=100 blockId=startbit_initIR block="Initialize Infrared Receiver"
+    export function startbit_initIR() {
         let echoPin: DigitalPin;
         let trigPin: DigitalPin;
         let result = 0;
@@ -1324,7 +1323,7 @@ namespace startbit {
         pins.setPull(trigPin, PinPullMode.PullNone);        
         pins.digitalWritePin(trigPin, 1);    
        
-        return result;
+        //return result;
     }
     
     let distanceBak = 0;
