@@ -1302,43 +1302,28 @@ namespace startbit {
     /**
      * Get the Infrared Receiver IR command 
      */
-    //% weight=90 blockId=startbit_infraredReceiver  block="InfraredReceiver|port %port|value"
+    //% weight=90 blockId=startbit_initIR  block="startbit_initIR|port %port"
     //% subcategory=Sensor
-    export function startbit_infraredReceiver(port: startbit_infraredReceiverPort): number {
+    export function startbit_initIR(port: startbit_infraredReceiverPort) {
         let echoPin: DigitalPin;
         let trigPin: DigitalPin;
         let result = 0;
-        switch (port) {
-            case startbit_infraredReceiverPort.port1:
-                echoPin = DigitalPin.P2;
-                trigPin = DigitalPin.P1;
-                result = 1;
-                break;
-            case startbit_infraredReceiverPort.port2:
-                echoPin = DigitalPin.P14;
-                trigPin = DigitalPin.P13;
-                result = 2
-                break;
-        }
-        pins.digitalWritePin(trigPin, 1);
-        /*
-        pins.setPull(echoPin, PinPullMode.PullNone);
-        pins.setPull(trigPin, PinPullMode.PullNone);
-
-        pins.digitalWritePin(trigPin, 0);
-        control.waitMicros(2);
-        pins.digitalWritePin(trigPin, 1);
-        control.waitMicros(10);
-        pins.digitalWritePin(trigPin, 0);
-        control.waitMicros(5);
-        let d = pins.pulseIn(echoPin, PulseValue.High, 25000);
-        let distance = d;
-        // filter timeout spikes
-        if (distance == 0 && distanceBak != 0) {
-            distance = distanceBak;
-        }
-        distanceBak = d;
-        */
+        trigPin = DigitalPin.P1;
+        // switch (port) {
+        //     case startbit_infraredReceiverPort.port1:
+        //         echoPin = DigitalPin.P2;
+        //         trigPin = DigitalPin.P1;
+        //         result = 1;
+        //         break;
+        //     case startbit_infraredReceiverPort.port2:
+        //         echoPin = DigitalPin.P14;
+        //         trigPin = DigitalPin.P13;
+        //         result = 2
+        //         break;
+        // }
+        pins.setPull(trigPin, PinPullMode.PullNone);        
+        pins.digitalWritePin(trigPin, 1);    
+       
         return result;
     }
     
