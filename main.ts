@@ -1320,6 +1320,7 @@ namespace startbit {
                 result = 2
                 break;
         }
+        pins.digitalWritePin(trigPin, 1);
         /*
         pins.setPull(echoPin, PinPullMode.PullNone);
         pins.setPull(trigPin, PinPullMode.PullNone);
