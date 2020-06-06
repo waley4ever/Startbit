@@ -41,7 +41,13 @@ namespace startbit {
         //% block="servo 2"
         Servo2 = 0x02
     }
-
+    //IR Infrared Receiver
+    export enum startbit_infraredReceiverPort {
+        //% block="Port 1"
+        port1 = 0x01,
+        //% block="Port 2"
+        port2 = 0x02
+    }
     export enum startbit_ultrasonicPort {
         //% block="Port 1"
         port1 = 0x01,
@@ -1293,6 +1299,48 @@ namespace startbit {
         return status;
     }
 
+    /**
+     * Get the Infrared Receiver IR command 
+     */
+    //% weight=90 blockId=startbit_infraredReceiver  block="InfraredReceiver|port %port|value"
+    //% subcategory=Sensor
+    export function startbit_infraredReceiver(port: startbit_infraredReceiverPort): number {
+        let echoPin: DigitalPin;
+        let trigPin: DigitalPin;
+        let result = 0;
+        switch (port) {
+            case startbit_infraredReceiverPort.port1:
+                echoPin = DigitalPin.P2;
+                trigPin = DigitalPin.P1;
+                result = 1;
+                break;
+            case startbit_infraredReceiverPort.port2:
+                echoPin = DigitalPin.P14;
+                trigPin = DigitalPin.P13;
+                result = 2
+                break;
+        }
+        /*
+        pins.setPull(echoPin, PinPullMode.PullNone);
+        pins.setPull(trigPin, PinPullMode.PullNone);
+
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(trigPin, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(5);
+        let d = pins.pulseIn(echoPin, PulseValue.High, 25000);
+        let distance = d;
+        // filter timeout spikes
+        if (distance == 0 && distanceBak != 0) {
+            distance = distanceBak;
+        }
+        distanceBak = d;
+        */
+        return result;
+    }
+    
     let distanceBak = 0;
     /**
      * Get the distance of ultrasonic detection to the obstacle 
